@@ -19,7 +19,10 @@ type Coord struct {
 }
 
 // Direction represents coordinate offset
-type Direction = Coord
+type Direction struct {
+	x int
+	y int
+}
 
 // Bounds represents coordinate rectangle
 type Bounds struct {
