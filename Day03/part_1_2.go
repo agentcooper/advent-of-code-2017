@@ -1,4 +1,4 @@
-package Day06
+package Day03
 
 import "github.com/agentcooper/advent-of-code-2017/utils"
 
