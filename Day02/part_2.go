@@ -4,26 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"strconv"
-	"strings"
+
+	"github.com/agentcooper/advent-of-code-2017/utils"
 )
-
-// IntFields is the same as strings.Fields, but returns ints
-func IntFields(s *string) ([]int, error) {
-	ss := strings.Fields(strings.TrimSpace(*s))
-
-	var ns []int
-
-	for _, r := range ss {
-		n, err := strconv.Atoi(r)
-		if err != nil {
-			return ns, err
-		}
-		ns = append(ns, n)
-	}
-
-	return ns, nil
-}
 
 // FindTwoDivisible finds a, b in ns where a / b == 0
 func FindTwoDivisible(ns []int) (int, int, error) {
@@ -45,7 +28,7 @@ func SolvePart2(r io.Reader) int {
 	for fscanner.Scan() {
 		s := fscanner.Text()
 
-		ns, err := IntFields(&s)
+		ns, err := utils.IntFields(&s)
 		if err != nil {
 			panic(err)
 		}
