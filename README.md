@@ -13,3 +13,9 @@ glide install
 ```
 make test
 ```
+
+### Bootstrap new day
+
+```
+make new NUMBER=XX # will create directory DayXX
+```
