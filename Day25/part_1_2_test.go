@@ -38,12 +38,12 @@ In state B:
 func TestSolvePart1Input(t *testing.T) {
 	file, err := os.Open("./input.txt")
 	assert.Nil(t, err)
-	assert.Equal(t, Solve(file, Part1), 1)
+	assert.Equal(t, Solve(file, Part1), 4287)
 }
 
 func TestSolvePart2Input(t *testing.T) {
 	file, err := os.Open("./input.txt")
 	assert.Nil(t, err)
 
-	assert.Equal(t, Solve(file, Part2), 0)
+	assert.Equal(t, Solve(file, Part2), 4287)
 }
