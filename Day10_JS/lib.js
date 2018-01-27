@@ -35,17 +35,6 @@ function partition(arr, partitionSize) {
 }
 
 function run(lengthSequence, times) {
-  for (let k = 0; k < times; k++) {
-    lengthSequence.forEach(length => {
-      perform(arr, current, length);
-
-      current = (current + length + skip) % arr.length;
-      skip += 1;
-    });
-  }
-}
-
-module.exports = function knotHash(input) {
   const arr = [];
 
   const LIST_SIZE = 256;
@@ -57,12 +46,7 @@ module.exports = function knotHash(input) {
   let current = 0;
   let skip = 0;
 
-  const lengthSequence = input
-    .split("")
-    .map(char => char.charCodeAt(0))
-    .concat([17, 31, 73, 47, 23]);
-
-  for (let k = 0; k < 64; k++) {
+  for (let k = 0; k < times; k++) {
     lengthSequence.forEach(length => {
       perform(arr, current, length);
 
@@ -71,38 +55,28 @@ module.exports = function knotHash(input) {
     });
   }
 
-  const out = partition(arr, 16)
+  return arr;
+}
+
+module.exports.part1 = function(input) {
+  const lengthSequence = input
+    .trim()
+    .split(",")
+    .map(Number);
+
+  return run(lengthSequence, 1);
+};
+
+module.exports.knotHash = function(input) {
+  const lengthSequence = input
+    .split("")
+    .map(char => char.charCodeAt(0))
+    .concat([17, 31, 73, 47, 23]);
+
+  const out = partition(run(lengthSequence, 64), 16)
     .map(arr => arr.reduce((acc, n) => acc ^ n, 0))
     .map(n => n.toString(16).padStart(2, "0"))
     .join("");
 
   return out;
 };
-
-// if (process.argv[2] !== "2") {
-//   const part1LengthSequence = [
-//     230,
-//     1,
-//     2,
-//     221,
-//     97,
-//     252,
-//     168,
-//     169,
-//     57,
-//     99,
-//     0,
-//     254,
-//     181,
-//     255,
-//     235,
-//     167,
-//   ];
-
-//   run(part1LengthSequence, 1);
-//   console.log(arr[0] * arr[1]);
-// } else {
-//   const part2Input = `230,1,2,221,97,252,168,169,57,99,0,254,181,255,235,167`;
-
-//   console.log(knotHash(part2Input));
-// }

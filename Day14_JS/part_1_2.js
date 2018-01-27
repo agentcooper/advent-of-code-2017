@@ -1,6 +1,9 @@
-const knotHash = require("../Day10/part_1_2");
+const { readFileSync } = require("fs");
+const path = require("path");
 
-const start = `vbqugkhl`;
+const { knotHash } = require("../Day10_JS/lib");
+
+const input = readFileSync(path.join(__dirname, "./input.txt"), "utf-8");
 
 let totalCount = 0;
 
@@ -20,9 +23,8 @@ function hashToBinary(hash) {
 const map = {};
 
 for (let i = 0; i < 128; i++) {
-  const input = `${start}-${i}`;
-
-  const line = hashToBinary(knotHash(input));
+  const s = `${input}-${i}`;
+  const line = hashToBinary(knotHash(s));
 
   if (line.length !== 128) {
     throw new Error("WTF");
