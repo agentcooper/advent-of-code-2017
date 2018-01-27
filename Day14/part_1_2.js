@@ -1,6 +1,6 @@
 const knotHash = require("../Day10/part_1_2");
 
-const start = `flqrgnkx`;
+const start = `vbqugkhl`;
 
 let totalCount = 0;
 
@@ -47,9 +47,9 @@ for (let i = 0; i < 128; i++) {
   totalCount += count;
 }
 
-let currentZone = 1;
+let currentZone = 0;
 
-function go(x, y, zone = -1) {
+function go(x, y, zone) {
   const coord = `x${x}y${y}`;
 
   if (typeof map[coord] === "undefined") {
@@ -65,14 +65,18 @@ function go(x, y, zone = -1) {
   }
 
   if (map[coord] === "#") {
-    if (zone === -1) {
-      map[coord] = currentZone;
+    let z;
+    if (typeof zone === "undefined") {
+      z = currentZone;
       currentZone += 1;
+    } else {
+      z = zone;
     }
-    go(x - 1, y, currentZone);
-    go(x + 1, y, currentZone);
-    go(x, y - 1, currentZone);
-    go(x, y + 1, currentZone);
+    map[coord] = z;
+    go(x - 1, y, z);
+    go(x + 1, y, z);
+    go(x, y - 1, z);
+    go(x, y + 1, z);
   }
 }
 
@@ -82,12 +86,5 @@ for (let x = 0; x < 128; x++) {
   }
 }
 
-// go(0, 0);
-
-console.log(currentZone);
-
-// console.log(
-//   "10100000110000100000000101110000".startsWith(hashToBinary("a0c2017")),
-// );
-
-// console.log(totalCount);
+console.assert(currentZone === 1180, "Part 1 is incorrect!");
+console.assert(totalCount === 8148, "Part 2 is incorrect!");
